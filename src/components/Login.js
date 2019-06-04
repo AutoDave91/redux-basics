@@ -13,6 +13,10 @@ class Login extends Component{
         store.subscribe(()=>this.setState({login: store.getState().login}))
     }
 
+   
+   
+
+    //We will hold onto the user's login name so we can display it throughout the site, and we will subscribe to this change in state so we can display the user's name on the page as they type it in.
     handleLogin(e){
         let action = {
             type: LOG_IN_USER,
@@ -21,6 +25,7 @@ class Login extends Component{
         store.dispatch(action)
     }
     
+
     render(){
         return(
             <div className='LOGIN'>
