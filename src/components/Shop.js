@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import store, { ADD_TO_CART, INCREASE_TOTAL } from "../store";
+
+import store, {ADD_TO_CART, ADD_TOTAL} from '../store';
 import products from "../products";
 import "./components.css";
 
 class Shop extends Component {
   constructor() {
-    super();
-
- //We get the state from the store for user and total so we can display them on this page    
+    super();   
+    //We get the state from the store for user and total so we can display them on this page
     this.state = {
       user: store.getState().login,
       products: [],
@@ -23,28 +23,20 @@ class Shop extends Component {
     store.subscribe(()=>{this.setState({total: store.getState().total})})
   }
 
- 
-  
-
-
   //We will send two actions, one which adds the product to the cart (pushing in an object) and one which keeps track of the total price
-  
   addToCart(product, price) {
       console.log(product, price)
-    
       let actionAddProduct = {
-      type: ADD_TO_CART,
-      payload: product
-    };
-
-    let actionIncrementPrice = {
-        type: INCREASE_TOTAL,
-        payload: price
-    }
-
-    store.dispatch(actionAddProduct);
-    store.dispatch(actionIncrementPrice);
-
+        type: ADD_TO_CART,
+        payload: product
+      };
+  
+      let actionIncrementPrice = {
+          type: ADD_TOTAL,
+          payload: price
+      }
+      store.dispatch(actionAddProduct);
+      store.dispatch(actionIncrementPrice)
   }
 
   render() {

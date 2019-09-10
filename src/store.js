@@ -1,38 +1,32 @@
-import { createStore } from "redux";
+import {createStore} from 'redux';
 
-///initial state
-
+// Initial State
 const initialState = {
-  login: "",
-  cart: [],
-  total: 0
+    login: '',
+    cart: [],
+    total: 0
 };
+// Actions
+export const UPDATE_LOGIN = 'UPDATE_LOGIN';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const ADD_TOTAL = 'ADD_TOTAL';
 
-///actions
-
-export const LOG_IN_USER = "LOG_IN_USER";
-export const ADD_TO_CART = "ADD_TO_CART";
-export const INCREASE_TOTAL = "INCREASE_TOTAL"
-
-///reducer
-
-function reducer(state = initialState, action) {
-    console.log(state)
-  switch (action.type) {
-    case LOG_IN_USER:
-      return { ...state, login: action.payload };
-    
-    case ADD_TO_CART:
-        const newCart = [...state.cart, action.payload]
-        return  {...state, cart: newCart};    
-
-    case INCREASE_TOTAL:
-        const newTotal = state.total += action.payload
-        return {...state, total: newTotal};    
-      
+// Reducer
+function reducer(state = initialState, action){
+    switch(action.type){
+        case UPDATE_LOGIN:
+            return{
+                ...state, login: action.payload
+            }
+        case ADD_TO_CART:
+            const newCart = [...state.cart, action.payload]
+            return{...state, cart: newCart}
+        case ADD_TOTAL:
+            const newTotal = state.total += action.payload
+            return {...state, total: newTotal}
         default:
-      return state;
-  }
+            return state
+    }
 }
 
 export default createStore(reducer)
